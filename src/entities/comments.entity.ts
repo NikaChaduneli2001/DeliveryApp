@@ -19,4 +19,9 @@ export class CommentsEntity {
   date: Date;
   @Column({ type: 'varchar', length: 300 })
   comment: string;
+  @Column({
+    type: 'boolean',
+    default: false,
+  })
+  isDeleted: boolean;
 }
