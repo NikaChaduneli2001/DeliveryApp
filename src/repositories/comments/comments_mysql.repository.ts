@@ -48,4 +48,6 @@ export class CommentsMysqlService {
   }
 
   async getAllComments(data: getAllCommentsDto) {}
+
+  async deleteComments(id: number, data) {}
 }
