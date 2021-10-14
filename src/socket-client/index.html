@@ -1,0 +1,33 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="chat.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Chat Socket</h1>
+
+    <div class="chat-container">
+      <div class="messages">
+        <ul class="chat-item" id="messages"></ul>
+      </div>
+    
+      
+    </div>
+    <div class="input-group">
+      <input class="input-text" id="message" type="text" />
+      <button class="input-submit" onclick="handleSubmitNewMessage()">Submit</button>
+    </div>
+  </div>
+  
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+  <script src="./chat-socket.js"></script>
+</body>
+
+</html>
