@@ -78,7 +78,7 @@ export class MenuMysqlService {
 
   async deleteMenu(id: number): Promise<MenuInterface> {
     this.logger.log(`delete menu id :${JSON.stringify(id)}`);
-    const deleteMenu = await this.MenuRepository.save({ id });
+    const deleteMenu = await this.MenuRepository.save({ id, isDeleted: true });
     this.logger.log(`deleted menu :${JSON.stringify(deleteMenu)}`);
     if (!deleteMenu) {
       this.logger.error(`deleted menu not found`);

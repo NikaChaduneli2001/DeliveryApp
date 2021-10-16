@@ -1,7 +1,7 @@
 import { OrdersEntity } from 'src/entities/orders.entity';
 import { UsersEntity } from 'src/entities/users.entity';
 
-export interface commentsInterface {
+export interface CommentsInterface {
   id: number;
   user: number | UsersEntity;
   order: number | OrdersEntity;
