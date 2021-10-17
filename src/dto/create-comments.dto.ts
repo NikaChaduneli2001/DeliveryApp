@@ -8,5 +8,5 @@ export class createCommentDto {
   @IsInt()
   orderId: number;
   @IsString()
-  comments: string;
+  comment: string;
 }

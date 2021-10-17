@@ -4,10 +4,13 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
+  Query,
   Req,
 } from '@nestjs/common';
 import { createCommentDto } from 'src/dto/create-comments.dto';
+import { getAllCommentsDto } from 'src/dto/get-all-comments.dto';
 import {
   getErrorMessage,
   getSuccessMessage,
@@ -68,6 +71,20 @@ export class CommentsController {
       );
     }
   }
+
+  @Get()
+  async getAllComments(@Query() data: getAllCommentsDto) {
+    try {
+      const comments = await this.commentsService.getAllComments(data);
+      if (!comments) {
+        return getErrorMessage('could not get all comments');
+      }
+      return getSuccessMessage(comments);
+    } catch {
+      return getErrorMessage('could not get all comments with given params');
+    }
+  }
+
   @Delete(':id')
   async deleteComments(@Param('id') id: number, @Req() req) {
     try {
@@ -84,5 +101,20 @@ export class CommentsController {
     } catch {
       return getErrorMessage('could not deleted comments with given params');
     }
+  }
+
+  @Patch(':id')
+  async updateComment(@Param('id') id: number, comment: string, @Req() req) {
+    const { user } = req;
+    const belongs = await this.commentsService.belongsToUser(id, user.userId);
+    if (!belongs) {
+      return getErrorMessage('not belongs comment to user');
+    }
+    const updated = await this.commentsService.updateComment(id, comment);
+    if (!updated) {
+      return getErrorMessage('Coul not updated comment');
+    }
+
+    return getSuccessMessage(updated);
   }
 }

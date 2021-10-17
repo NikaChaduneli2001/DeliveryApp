@@ -1,14 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { create } from 'domain';
 import { createCommentDto } from 'src/dto/create-comments.dto';
+import { getAllCommentsDto } from 'src/dto/get-all-comments.dto';
 import { CommentsMysqlService } from 'src/repositories/comments/comments_mysql.repository';
+import { OrdersRepository } from 'src/repositories/orders/orders_mysql.repository';
 
 @Injectable()
 export class CommentsService {
-  constructor(private readonly commentRepo: CommentsMysqlService) {}
+  constructor(
+    private readonly commentRepo: CommentsMysqlService,
+    private readonly OrdersRepo: OrdersRepository,
+  ) {}
 
   async createComment(data: createCommentDto) {
     try {
+      const getOneOrder = await this.OrdersRepo.getOneOrder(data.orderId);
+      if (getOneOrder.status != 'Delivered') {
+        return 'you can not create comment';
+      }
       const created = await this.commentRepo.createComment(data);
       if (!created) {
         return false;
@@ -26,6 +35,18 @@ export class CommentsService {
         return false;
       }
       return foundComment;
+    } catch {
+      return undefined;
+    }
+  }
+
+  async getAllComments(data: getAllCommentsDto) {
+    try {
+      const allComments = await this.commentRepo.getAllComments(data);
+      if (!allComments) {
+        return false;
+      }
+      return allComments;
     } catch {
       return undefined;
     }
