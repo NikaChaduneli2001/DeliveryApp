@@ -21,6 +21,8 @@ export class CommentsMysqlService {
     newComment.comment = data.comment;
     newComment.order = data.orderId;
     newComment.user = data.userId;
+    newComment.date = new Date();
+    newComment.isDeleted = false;
     const comment = await this.CommentRepository.save(newComment);
     if (!comment) {
       return null;
@@ -91,6 +93,7 @@ export class CommentsMysqlService {
         order: {
           id: comm.comment_id,
           user: {
+            id: comm.user_id,
             fullName: comm.user_fullName,
             role: comm.user_role,
             phone: comm.user_phone,

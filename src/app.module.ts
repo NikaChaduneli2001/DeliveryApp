@@ -19,6 +19,7 @@ import { MessageModule } from './modules/message/message.module';
 import { Message } from './entities/message.entity';
 import { ChatGateway } from './chat.gateway';
 import { ConfigModule } from '@nestjs/config';
+import { CommentsEntity } from './entities/comments.entity';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { ConfigModule } from '@nestjs/config';
         OrdersEntity,
         ReviewEntity,
         AddressEntity,
+        CommentsEntity
       ],
       synchronize: true,
     }),
