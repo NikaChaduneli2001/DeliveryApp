@@ -20,6 +20,7 @@ import { Message } from './entities/message.entity';
 import { ChatGateway } from './chat.gateway';
 import { ConfigModule } from '@nestjs/config';
 import { CommentsEntity } from './entities/comments.entity';
+import { CommentsModule } from './modules/comments/comments.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { CommentsEntity } from './entities/comments.entity';
     OrdersModule,
     AuthModule,
     MessageModule,
+    CommentsModule,
   ],
   controllers: [],
   providers: [ChatGateway],

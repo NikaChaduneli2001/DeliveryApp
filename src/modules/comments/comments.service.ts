@@ -16,7 +16,7 @@ export class CommentsService {
     try {
       const getOneOrder = await this.OrdersRepo.getOneOrder(data.orderId);
       if (getOneOrder.status != 'Delivered') {
-        return 'you can not create comment';
+        return 'you can not create comment it is not delivered';
       }
       const created = await this.commentRepo.createComment(data);
       if (!created) {
